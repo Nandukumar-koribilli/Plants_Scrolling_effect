@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susan Rose | Premium Plant Nursery</title>
+    <meta name="description" content="Susan Rose - Cultivating elegance and nature's finest botanicals.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* 
+         * DESIGN SYSTEM & TOKENS 
+         * Theme: "Botanical Elegance"
+         */
+        :root {
+            /* Colors */
+            --color-bg-body: #FAF9F6;
+            /* Off-white / Cream */
+            --color-text-primary: #1A2E1A;
+            /* Deep Forest Green */
+            --color-text-secondary: #4A5D4A;
+            /* Muted Green */
+            --color-accent: #D4A373;
+            /* Earthy Gold */
+            --color-accent-soft: #E6CCB2;
+            /* Pale Sand */
+            --color-rose: #C08497;
+            /* Dusty Rose */
+            --color-surface: #FFFFFF;
+            --color-surface-alt: #F0F2EF;
+            /* Very light sage */
+
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+
+            /* Transitions */
+            --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 0.3s ease-out;
+
+            /* Shadows */
+            --shadow-soft: 0 10px 30px -10px rgba(26, 46, 26, 0.05);
+            --shadow-hover: 0 20px 40px -12px rgba(26, 46, 26, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --color-bg-body: #0d120d;
+            --color-text-primary: #e6e8e6;
+            --color-text-secondary: #a0afa0;
+            --color-surface: #162016;
+            --color-surface-alt: #1c291c;
+            --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        [data-theme="dark"] .hero-overlay,
+        [data-theme="dark"] .hero-sticky .hero-overlay {
+            background: linear-gradient(to bottom, rgba(13, 18, 13, 0.7), rgba(13, 18, 13, 0.3));
+        }
+
+        [data-theme="dark"] .navbar.scrolled {
+            background-color: rgba(13, 18, 13, 0.95);
+        }
+
+        [data-theme="dark"] .hero-container {
+            background-color: #0d120d;
+        }
+
+        /* Toggle Button */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-primary);
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform var(--transition-fast), color var(--transition-fast);
+            margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+            color: var(--color-rose);
+        }
+
+        .theme-toggle svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* 
+         * RESET & BASE STYLES 
+         */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg-body);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 
+         * UTILITIES 
+         */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .section-padding {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .gap-8 {
+            gap: 2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 
+         * TYPOGRAPHY COMPONENTS
+         */
+        .display-text {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--color-text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            color: var(--color-text-primary);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-text-primary);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--transition-fast);
+        }
+
+        .btn:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn:hover {
+            color: var(--color-surface);
+        }
+
+        .btn-primary {
+            background: var(--color-text-primary);
+            color: var(--color-surface);
+            border-color: var(--color-text-primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--color-text-primary);
+        }
+
+        .btn-primary::after {
+            background: var(--color-bg-body);
+        }
+
+        /* 
+         * NAVIGATION 
+         */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: var(--spacing-sm) 0;
+            transition: background-color var(--transition-fast), padding var(--transition-fast);
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-xs) 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--color-text-primary);
+        }
+
+        .logo span {
+            font-style: italic;
+            color: var(--color-rose);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-text-primary);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background: var(--color-rose);
+            color: white;
+            font-size: 0.6rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .bar {
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-text-primary);
+            transition: transform var(--transition-fast);
+        }
+
+        /* 
+         * HERO SECTION 
+         */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #EAECE8;
+            /* Fallback */
+            overflow: hidden;
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Canvas will be handled by JS */
+            opacity: 0.8;
+            filter: grayscale(20%) brightness(0.9);
+        }
+
+        .hero-container {
+            height: 400vh;
+            /* Scrollytelling track length */
+            position: relative;
+            background-color: #EAECE8;
+            /* Fallback color matching hero */
+        }
+
+        .hero-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(250, 249, 246, 0.4), rgba(250, 249, 246, 0.1));
+            z-index: 1;
+            /* Ensure overlay is above canvas */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 var(--spacing-sm);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s var(--transition-slow) forwards 0.5s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 
+         * FEATURED PLANTS 
+         */
+        .featured-plants {
+            background: var(--color-bg-body);
+        }
+
+        .plant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding-top: var(--spacing-md);
+        }
+
+        .plant-card {
+            background: var(--color-surface);
+            transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .plant-img-wrapper {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .plant-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .plant-card:hover .plant-img {
+            transform: scale(1.1);
+        }
+
+        .plant-info {
+            padding: var(--spacing-md);
+            text-align: center;
+            background: var(--color-surface);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transform: translateY(60%);
+            /* Hide details initially */
+            transition: transform var(--transition-slow);
+        }
+
+        .plant-card:hover .plant-info {
+            transform: translateY(0);
+        }
+
+        .plant-name {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .plant-price {
+            font-family: var(--font-sans);
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .add-to-cart {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            color: var(--color-text-primary);
+            border-bottom: 1px solid var(--color-text-primary);
+            padding-bottom: 2px;
+            opacity: 0;
+            transition: opacity 0.3s 0.1s;
+        }
+
+        .plant-card:hover .add-to-cart {
+            opacity: 1;
+        }
+
+        /* 
+         * ABOUT SECTION 
+         */
+        .about-section {
+            background-color: var(--color-surface-alt);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+
+        .about-image {
+            height: 600px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 200px 200px 0 0;
+            /* Arch shape */
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-text {
+            padding-right: var(--spacing-lg);
+        }
+
+        .decorative-text {
+            font-family: var(--font-serif);
+            font-size: 10rem;
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* 
+         * TESTIMONIALS 
+         */
+        .testimonials {
+            background-color: var(--color-bg-body);
+        }
+
+        .quote-icon {
+            font-size: 4rem;
+            color: var(--color-rose);
+            opacity: 0.3;
+            font-family: var(--font-serif);
+            line-height: 1;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .review-text {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            margin: var(--spacing-sm) 0;
+            color: var(--color-text-primary);
+        }
+
+        .reviewer {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+        }
+
+        /* 
+         * FOOTER 
+         */
+        .footer {
+            background-color: #1a2e1a;
+            color: #faf9f6;
+            padding-top: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-brand h3 {
+            color: #faf9f6;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: var(--spacing-md);
+            color: #faf9f6;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .newsletter-form input {
+            background: transparent;
+            border: none;
+            color: white;
+            flex-grow: 1;
+            padding: 0.5rem;
+            font-family: var(--font-sans);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: transparent;
+            border: none;
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: var(--spacing-md);
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* 
+         * MOBILE RESPONSIVENESS 
+         */
+        @media (max-width: 768px) {
+            .display-text {
+                font-size: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 400px;
+                order: -1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                background: var(--color-bg-body);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform var(--transition-fast);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .mobile-toggle {
+                display: flex;
+                z-index: 1001;
+            }
+        }
+
+        /* 
+         * ANIMATION CLASSES (Observer) 
+         */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Susan <span>Rose</span></a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#plants" class="nav-link">Plants</a></li>
+                <li><a href="#about" class="nav-link">Our Philosophy</a></li>
+                <li><a href="#care" class="nav-link">Care Guide</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="nav-link">Cart (0)</a></li>
+            </ul>
+
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <!-- Sun Icon (Default) -->
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <!-- Moon Icon (Hidden by default, swapped via JS) -->
+                <svg class="moon-icon hidden" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        /* ... existing styles ... */
+
+        /* UPDATED HERO STYLES FOR SCROLL ANIMATION */
+        .hero-container {
+            height: 500vh;
+            /* Long scroll track */
+            position: relative;
+        }
+
+        .hero-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+    <!-- ... -->
+    <!-- Hero Section -->
+    <div class="hero-container" id="hero-track">
+        <header class="hero-sticky">
+            <canvas id="hero-canvas" class="hero-bg-img"></canvas>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="section-subtitle">Since 1985</span>
+                <h1 class="display-text">Cultivating nature's <br>finest elegance.</h1>
+                <a href="#plants" class="btn btn-primary">Explore Collection</a>
+            </div>
+        </header>
+    </div>
+
+    <!-- ... rest of HTML ... -->
+
+    <script>
+        // ... existing scripts ...
+
+        // ---------------------------------------------------------
+        // HERO IMAGE SEQUENCE ANIMATION
+        // ---------------------------------------------------------
+
+        const canvas = document.getElementById('hero-canvas');
+        const context = canvas.getContext('2d');
+        const heroTrack = document.getElementById('hero-track');
+        const frameCount = 80;
+        const currentFrame = index => (
+            `images/heroanimation/Video_Generation_of_Moving_Leaves_${index.toString().padStart(3, '0')}.jpg`
+        );
+
+        const images = [];
+        const plants = { frame: 0 };
+
+        // ... resizeCanvas ...
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            render();
+        };
+        window.addEventListener('resize', resizeCanvas);
+
+        // ... preloadImages ...
+        const preloadImages = () => {
+            let loadedCount = 0;
+            for (let i = 0; i < frameCount; i++) {
+                const img = new Image();
+                img.src = currentFrame(i);
+                img.onload = () => {
+                    loadedCount++;
+                    if (loadedCount === frameCount) {
+                        startAnimation();
+                    }
+                };
+                images.push(img);
+            }
+        };
+
+        // ... render ...
+        const render = () => {
+            if (!images[plants.frame] || !images[plants.frame].complete) return;
+            const img = images[plants.frame];
+            const canvasRatio = canvas.width / canvas.height;
+            const imgRatio = img.width / img.height;
+            let drawWidth, drawHeight, offsetX, offsetY;
+            if (canvasRatio > imgRatio) {
+                drawWidth = canvas.width;
+                drawHeight = drawWidth / imgRatio;
+                offsetX = 0;
+                offsetY = (canvas.height - drawHeight) / 2;
+            } else {
+                drawHeight = canvas.height;
+                drawWidth = drawHeight * imgRatio;
+                offsetX = (canvas.width - drawWidth) / 2;
+                offsetY = 0;
+            }
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+        };
+
+        // UPDATED Scroll Animation Logic
+        const updateScroll = () => {
+            const scrollTop = window.scrollY;
+            const trackHeight = heroTrack.offsetHeight - window.innerHeight;
+            // Calculate progress specifically for the hero track
+            // We want it to finish exactly when the user reaches the end of the sticky section
+            let progress = scrollTop / trackHeight;
+
+            // Clamp progress between 0 and 1
+            progress = Math.min(1, Math.max(0, progress));
+
+            const targetFrame = Math.floor(progress * (frameCount - 1));
+
+            if (targetFrame !== plants.frame) {
+                plants.frame = targetFrame;
+                requestAnimationFrame(render);
+            }
+        };
+
+        window.addEventListener('scroll', updateScroll);
+
+        const startAnimation = () => {
+            resizeCanvas();
+            updateScroll(); // Initialize exact frame based on load position
+        };
+
+        preloadImages();
+
+    </script>
+
+    <!-- Featured Plants -->
+    <section class="featured-plants section-padding" id="plants">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-subtitle">Curated Selection</span>
+                <h2 class="section-title">This Season's Favorites</h2>
+            </div>
+
+            <div class="plant-grid">
+                <!-- Plant 1 -->
+                <div class="plant-card reveal" style="transition-delay: 0.1s;">
+                    <div class="plant-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1597055181300-e30d32b35a96?q=80&w=2670&auto=format&fit=crop"
+                            alt="Monstera Deliciosa" class="plant-img">
+                    </div>
+                    <div class="plant-info">
+                        <h3 class="plant-name">Monstera Deliciosa</h3>
+                        <span class="plant-price">$45.00</span>
+                        <a href="#" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+
+                <!-- Plant 2 -->
+                <div class="plant-card reveal" style="transition-delay: 0.2s;">
+                    <div class="plant-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=2670&auto=format&fit=crop"
+                            alt="Ficus Elastica" class="plant-img">
+                    </div>
+                    <div class="plant-info">
+                        <h3 class="plant-name">Ficus Elastica</h3>
+                        <span class="plant-price">$38.00</span>
+                        <a href="#" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+
+                <!-- Plant 3 -->
+                <div class="plant-card reveal" style="transition-delay: 0.3s;">
+                    <div class="plant-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?q=80&w=2674&auto=format&fit=crop"
+                            alt="Strelitzia Nicolai" class="plant-img">
+                    </div>
+                    <div class="plant-info">
+                        <h3 class="plant-name">Strelitzia Nicolai</h3>
+                        <span class="plant-price">$62.00</span>
+                        <a href="#" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center section-padding" style="padding-bottom: 0;">
+                <a href="#" class="btn">View All Plants</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section section-padding" id="about">
+        <span class="decorative-text">GROW</span>
+        <div class="container about-grid">
+            <div class="about-text reveal">
+                <span class="section-subtitle">Our Philosophy</span>
+                <h2 class="section-title">Rooted in Passion,<br>Grown with Love.</h2>
+                <p style="margin-bottom: 2rem; color: var(--color-text-secondary);">
+                    At Susan Rose, we believe that bringing nature indoors is more than just decoration—it's a
+                    lifestyle.
+                    Founded over three decades ago, our nursery has been a sanctuary for rare botanicals and classic
+                    favorites alike.
+                </p>
+                <p style="margin-bottom: 2rem; color: var(--color-text-secondary);">
+                    Every plant is hand-selected and nurtured by our expert team to ensure it thrives in your home.
+                    We are dedicated to sustainable practices and helping you cultivate your own personal Eden.
+                </p>
+                <a href="#" class="btn">Read Our Story</a>
+            </div>
+            <div class="image-wrapper reveal" style="transition-delay: 0.2s;">
+                <img src="images/philosophy.png" alt="Greenhouse Interior" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Values -->
+    <section class="section-padding" style="background-color: #F8F6F4;">
+        <div class="container">
+            <div class="flex flex-col items-center reveal">
+                <div class="grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); width: 100%; gap: 4rem; text-align: center;">
+                    <div class="value-item">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem;">Expert
+                            Guidance</h4>
+                        <p style="color: var(--color-text-secondary); font-size: 0.9rem;">Our botanists are always
+                            available to help you choose the perfect plant for your light and lifestyle.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem;">Sustainable
+                            Growing</h4>
+                        <p style="color: var(--color-text-secondary); font-size: 0.9rem;">We use organic fertilizers and
+                            eco-friendly pest management to keep our plants healthy naturally.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem;">Safe
+                            Delivery</h4>
+                        <p style="color: var(--color-text-secondary); font-size: 0.9rem;">Specialized packaging ensures
+                            your green friends arrive at your doorstep fresh and undamaged.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonials section-padding">
+        <div class="container">
+            <div class="testimonial-slider reveal">
+                <div class="quote-icon">“</div>
+                <p class="review-text">
+                    The quality of the Fiddle Leaf Fig I received was unmatched.
+                    It arrived lush, healthy, and larger than I expected.
+                    Susan Rose is now my only source for indoor botanicals.
+                </p>
+                <span class="reviewer">— Eleanor D., Interior Designer</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3 class="logo">Susan <span>Rose</span></h3>
+                    <p>Bringing life to your living spaces with premium, hand-raised plants since 1985.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">Pet Friendly</a></li>
+                        <li><a href="#">Pots & Planters</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Plant Care</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem;">Join our community
+                        for care tips and exclusive offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button type="button">Join</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // DOM Elements
+        const navbar = document.getElementById('navbar');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const reveals = document.querySelectorAll('.reveal');
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const sunIcon = themeToggle.querySelector('.sun-icon');
+        const moonIcon = themeToggle.querySelector('.moon-icon');
+
+        // Theme Toggle Logic
+        const toggleTheme = () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        };
+
+        const updateThemeIcon = (theme) => {
+            if (theme === 'dark') {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        };
+
+        // Initialize Theme
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        htmlElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Scroll Effect for Navbar
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+
+            // Animate Hamburger
+            const bars = mobileToggle.children;
+            if (navLinks.classList.contains('active')) {
+                bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+                bars[1].style.opacity = '0';
+                bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+            } else {
+                bars[0].style.transform = 'none';
+                bars[1].style.opacity = '1';
+                bars[2].style.transform = 'none';
+            }
+        });
+
+        // Intersection Observer for Scroll Animations
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function (entries, revealOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    revealOnScroll.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => {
+            revealOnScroll.observe(reveal);
+        });
+
+        // Smooth Scroll for Anchor Links (shim for older browsers, though html scroll-behavior covers most)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.classList.remove('active'); // Close mobile menu if open
+
+                // Reset hamburger
+                const bars = mobileToggle.children;
+                bars[0].style.transform = 'none';
+                bars[1].style.opacity = '1';
+                bars[2].style.transform = 'none';
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+
+
+    </script>
+</body>
+
+</html>
