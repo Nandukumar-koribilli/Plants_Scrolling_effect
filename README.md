@@ -102,16 +102,6 @@ The hero section uses HTML5 Canvas and GSAP ScrollTrigger to create a frame-by-f
 - Hero canvas animation synced with scroll position
 - Smooth transitions throughout the UI
 
-## 🌐 Browser Support
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Opera 76+
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 👤 Author
 
